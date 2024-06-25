@@ -1,4 +1,5 @@
-import Products from "./components/posts";
+import Products from "./components/products";
+
 
 const PostsPage = () => {
   return (

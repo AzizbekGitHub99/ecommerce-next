@@ -8,8 +8,6 @@ import request from "@/request";
 import { LIMIT } from "@/constants";
 import Image from "next/image";
 
-import ver from "@/assets/next.svg";
-
 const Products = () => {
   const params = useSearchParams();
   const router = useRouter();
@@ -45,32 +43,30 @@ const Products = () => {
 
   return (
     <Fragment>
-      <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-5 mx-3">
+      <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-5 mx-3 mb-10">
         {loading
           ? "...Loading"
           : products.map((product) => (
-              <div
+              <Link
+                href="#"
                 key={product._id}
-                className="w-full max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700"
+                className="mx-auto w-full max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 rounded-t-lg"
               >
-                <Link className="relative h-80" href="#">
+                <div className="image-box h-72 relative">
                   <Image
-                    layout="responsive"
-                    objectFit="cover"
-                    height={300}
-                    width={100}
+                    fill
                     className="p-1 rounded-t-lg"
                     src={product.image.url}
                     alt="product image"
                     priority
                   />
-                </Link>
+                </div>
                 <div className="px-5 pb-5">
-                  <Link href="#">
+                  <div>
                     <h5 className="text-xl font-semibold tracking-tight text-gray-900 dark:text-white">
                       {`${product.title}, ${product.description}`}
                     </h5>
-                  </Link>
+                  </div>
                   <div className="flex items-center mt-2.5 mb-5">
                     <div className="flex items-center space-x-1 rtl:space-x-reverse">
                       <svg
@@ -130,8 +126,77 @@ const Products = () => {
                     </Link>
                   </div>
                 </div>
-              </div>
+              </Link>
             ))}
+      </div>
+      <div className="pagination w-full">
+        <nav aria-label="Page navigation example" className=" w-full">
+          <ul className="flex items-center -space-x-px mx-auto h-10 text-base">
+            <li>
+              <Link
+                href="#"
+                className="flex items-center justify-center px-4 h-10 ms-0 leading-tight text-gray-500 bg-white border border-e-0 border-gray-300 rounded-s-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
+              >
+                <span className="sr-only">Previous</span>
+                <svg
+                  className="w-3 h-3 rtl:rotate-180"
+                  aria-hidden="true"
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 6 10"
+                >
+                  <path
+                    stroke="currentColor"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth="2"
+                    d="M5 1 1 5l4 4"
+                  />
+                </svg>
+              </Link>
+            </li>
+            <li>
+              <Link
+                href="#"
+                className="flex items-center justify-center px-4 h-10 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
+              >
+                2
+              </Link>
+            </li>
+            <li>
+              <Link
+                href="#"
+                aria-current="page"
+                className="z-10 flex items-center justify-center px-4 h-10 leading-tight text-blue-600 border border-blue-300 bg-blue-50 hover:bg-blue-100 hover:text-blue-700 dark:border-gray-700 dark:bg-gray-700 dark:text-white"
+              >
+                3
+              </Link>
+            </li>
+            <li>
+              <Link
+                href="#"
+                className="flex items-center justify-center px-4 h-10 leading-tight text-gray-500 bg-white border border-gray-300 rounded-e-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
+              >
+                <span className="sr-only">Next</span>
+                <svg
+                  className="w-3 h-3 rtl:rotate-180"
+                  aria-hidden="true"
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 6 10"
+                >
+                  <path
+                    stroke="currentColor"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth="2"
+                    d="m1 9 4-4-4-4"
+                  />
+                </svg>
+              </Link>
+            </li>
+          </ul>
+        </nav>
       </div>
       <button onClick={previous}>Previous</button>
       {page}
