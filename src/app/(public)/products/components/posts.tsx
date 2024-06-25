@@ -29,7 +29,7 @@ const Products = () => {
       setLoading(false);
       setProducts(products);
       console.log(products);
-      
+
       router.push(`?page=${page}&limit=${LIMIT}`);
     };
     getProducts();
@@ -45,7 +45,7 @@ const Products = () => {
 
   return (
     <Fragment>
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
+      <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-5 mx-3">
         {loading
           ? "...Loading"
           : products.map((product) => (
@@ -53,13 +53,16 @@ const Products = () => {
                 key={product._id}
                 className="w-full max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700"
               >
-                <Link href="#">
+                <Link className="relative h-80" href="#">
                   <Image
-                    width={200}
-                    height={500}
-                    className="p-8 rounded-t-lg"
-                    src={ver}
+                    layout="responsive"
+                    objectFit="cover"
+                    height={300}
+                    width={100}
+                    className="p-1 rounded-t-lg"
+                    src={product.image.url}
                     alt="product image"
+                    priority
                   />
                 </Link>
                 <div className="px-5 pb-5">
@@ -115,7 +118,7 @@ const Products = () => {
                       5.0
                     </span>
                   </div>
-                  <div className="flex items-center justify-between">
+                  <div className="mt-auto flex items-center justify-between">
                     <span className="text-3xl font-bold text-gray-900 dark:text-white">
                       ${(product.price * 0.000079).toFixed(2)}
                     </span>
